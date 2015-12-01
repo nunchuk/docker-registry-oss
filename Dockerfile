@@ -1,5 +1,5 @@
 # This file describes how to build a private docker-registry backend Aliyun OSS as the storage
-# VERSION 1 - EDITION 2
+# VERSION 1 - EDITION 0
 # Author: Chuck Zhang
 
 FROM registry:0.9.1
