@@ -1,5 +1,5 @@
 # This file describes how to build a private docker-registry backend Aliyun OSS as the storage
-# VERSION 1 - EDITION 0
+# VERSION 1 - EDITION 1
 # Author: Chuck Zhang
 
 FROM registry:0.9.1
@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y wget unzip
 
 # Get oss api 
 RUN mkdir -p /oss/api && cd /oss/api \
-    && wget http://aliyunecs.oss-cn-hangzhou.aliyuncs.com/OSS_Python_API_20140509.zip \
+    && wget https://github.com/nunchuk/docker-registry-oss/blob/master/common/OSS_Python_API_20140509.zip \
     && unzip OSS_Python_API_20140509.zip && sudo python setup.py install
 
 # Get docker-registry-driver-oss
@@ -23,7 +23,8 @@ RUN cd /oss \
 RUN \rm -rf /oss
 
 # Add oss config
-ADD config_sample.yml /docker-registry/config/config_sample.yml
+wget https://github.com/nunchuk/docker-registry-oss/blob/master/common/config_sample.yml \
+&& ADD config_sample.yml /docker-registry/config/config_sample.yml
 ENV SETTINGS_FLAVOR oss
 ENV OSS_HOST your_oss_host
 ENV OSS_BUCKET your_oss_bucket
